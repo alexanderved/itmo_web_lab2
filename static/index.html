@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <title>Web Lab1</title>
+
+        <script defer src="index.js"></script>
+        <style>
+            body {
+                color: white;
+                background-color: rgb(50, 50, 50);
+            }
+
+            header {
+                font-style: italic;
+                font-size: 14pt;
+                background-color: rgb(40, 40, 40);
+                padding: 10px
+            }
+
+            header > p {
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
+            body > table {
+                width: 50%;
+                margin: 20px auto;
+                table-layout: fixed;
+
+                background-color: rgb(60, 60, 60);
+                padding: 20px;
+                border: 3px solid rgb(21, 53, 200);
+                border-radius: 7px;
+            }
+
+            form > table {
+                width: 100%;
+                table-layout: fixed;
+            }
+
+            #data-form > table td {
+                padding: 2%;
+            }
+
+            form > table td:has(> button) {
+                width: 200px;
+            }
+
+            tfoot th, tfoot td {
+                border: 1px solid;
+                padding: 5px;
+                text-align: center;
+
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            tbody > tr > td {
+                text-align: center;
+            }
+
+            #graph {
+                margin: auto;
+                border: 3px solid rgb(21, 53, 200);
+                border-radius: 7px;
+            }
+
+            #data-form {
+                margin: auto;
+                padding: 15px;
+                width: 13em;
+
+                text-align: left;
+
+                background-color: rgb(20, 20, 20);
+                border: 2px solid rgb(21, 53, 200);
+                border-radius: 7px;
+            }
+
+            .form-input {
+                border: 2px solid rgb(21, 53, 200);
+                border-radius: 7px;
+                padding: 5px;
+                width: 70px;
+            }
+
+            #form-submit {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 3%;
+            }
+
+            #history-clear {
+                display: flex;
+                justify-content: center;
+            }
+
+            .form-field > label {
+                margin-right: 10%;
+            }
+
+            #error-field {
+                color: red;
+                margin-bottom: 10%;
+            }
+
+            tfoot > tr:not(:has(> th)):hover {
+                background-color: rgb(40, 40, 40);
+            }
+
+            button {
+                border: 2px solid rgb(21, 53, 200);
+                border-radius: 7px;
+                padding: 5px;
+            }
+
+            button[type="reset"] {
+                border: 2px solid rgb(200, 53, 21);
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <p>Ведехин Александр Вадимович</p>
+            <p>Группа P3218</p>
+            <p>Вариант 465382</p>
+        </header>
+
+        <table id="main-table">
+            <thead>
+                <tr>
+                    <th colspan="6"><b>Ввод данных</b></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td colspan="6"><hr /></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3">
+                        <form id="data-form" action="" method="GET">
+                            <table>
+                                <tr class="form-field">
+                                    <td>
+                                        <label for="x"><b>Введите X:</b></label>
+                                    </td>
+                                    <td>
+                                        <input type="text"
+                                               id="x"
+                                               class="form-input"
+                                               name="x"
+                                               size="5"
+                                               placeholder="-5 ... 5"
+                                        />
+                                    </td>
+                                </tr>
+
+                                <tr class="form-field">
+                                    <td>
+                                        <label for="y"><b>Введите Y:</b></label>
+                                    </td>
+                                    <td>
+                                        <select class="form-input" id="y" name="y">
+                                            <option value="-2">-2</option>
+                                            <option value="-1.5">-1.5</option>
+                                            <option value="-1">-1</option>
+                                            <option value="-0.5">-0.5</option>
+                                            <option value="0">0</option>
+                                            <option value="0.5">0.5</option>
+                                            <option value="1">1</option>
+                                            <option value="1.5">1.5</option>
+                                            <option value="2">2</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr class="form-field">
+                                    <td>
+                                        <label for="r"><b>Введите R:</b></label>
+                                    </td>
+                                    <td>
+                                        <select class="form-input" id="r" name="r">
+                                            <option value="1">1</option>
+                                            <option value="1.5">1.5</option>
+                                            <option value="2">2</option>
+                                            <option value="2.5">2.5</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr><td colspan="2" id="error-field" hidden></td></tr>
+
+                                <tr>
+                                    <td colspan="2" id="form-submit">
+                                        <button type="submit">Отправить</button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="2" id="history-clear">
+                                        <button id="history-clear-button" type="reset">
+                                            Очистить историю
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </td>
+                    <td colspan="3">
+                        <canvas id="graph" width="400" height="400">
+
+                        </canvas>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="6"><hr /></td>
+                </tr>
+            </tbody>
+
+            <tfoot id="result-data">
+                <tr>
+                    <th class="value">X</th>
+                    <th class="value">Y</th>
+                    <th class="value">R</th>
+                    <th class="info">Попадение</th>
+                    <th class="info">Время</th>
+                    <th class="info">Время выполнения</th>
+                </tr>
+            </tfoot>
+        </table>
+    </body>
+</html>
