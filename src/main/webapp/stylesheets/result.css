@@ -1,0 +1,63 @@
+body {
+    color: white;
+    background-color: rgb(50, 50, 50);
+}
+
+header {
+    font-style: italic;
+    font-size: 14pt;
+    background-color: rgb(40, 40, 40);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 10px;
+}
+
+header > div > p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+header > div {
+    margin: 10px
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    width: 50%;
+    margin: 20px auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: rgb(60, 60, 60);
+    padding: 20px;
+    border: 3px solid rgb(21, 53, 200);
+    border-radius: 7px;
+}
+
+#results-table {
+    width: 100%;
+    table-layout: fixed;
+
+    margin-bottom: 20px;
+}
+
+.result-row th, .result-row td {
+    border: 1px solid;
+    padding: 5px;
+    text-align: center;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#return-button {
+    border: 2px solid rgb(21, 53, 200);
+    border-radius: 7px;
+    padding: 10px;
+}

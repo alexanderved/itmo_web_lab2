@@ -1,21 +1,14 @@
 apply plugin: 'java'
-apply plugin: 'application'
+apply plugin: 'war'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation files('./libs/fastcgi-lib.jar')
-}
-
-jar {
-    manifest {
-        attributes(
-            'Main-Class': 'web.Main'
-        )
-    }
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    }
+    compileOnly('jakarta.validation:jakarta.validation-api:3.1.0')
+    compileOnly('jakarta.enterprise:jakarta.enterprise.cdi-api:4.1.0')
+    compileOnly('jakarta.json.bind:jakarta.json.bind-api:3.0.1')
+    compileOnly('jakarta.servlet:jakarta.servlet-api:6.1.0')
+    compileOnly('jakarta.ejb:jakarta.ejb-api:4.0.1')
 }

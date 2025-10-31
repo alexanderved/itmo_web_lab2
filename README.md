@@ -1,1 +1,1 @@
-# itmo_web_lab1
+# itmo_web_lab2
